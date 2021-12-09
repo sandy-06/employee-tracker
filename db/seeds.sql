@@ -1,9 +1,9 @@
 INSERT INTO department (name)
 VALUES
-(Sales)
-(Engineering)
-(Finance)
-(Legal)
+(Sales),
+(Engineering),
+(Finance),
+(Legal),
 
 
 INSERT INTO role (title, salary, department_id)
@@ -13,7 +13,7 @@ VALUES
 (Software Engineer, 120000, 2)
 (Account Manager, 150000, 3)
 (Accountant, 100000, 3)
-(Leagal team Lead, 250000, 4)
+(Legal team Lead, 250000, 4)
 (Lawyer, 180000, 4)
 
 
