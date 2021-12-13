@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
 const connect = require('./db/connect');
 const consoleTable = require('console.table');
-const { prompt } = require('inquirer');
 const DB = require('./db/index')
 const db = require('./db/index')
 
@@ -101,7 +100,38 @@ const viewAllDepartments = () => {
     })
 };
 
-// view all roles
+/*WHEN I choose to view all roles
+THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role*/
 const viewAllRoles = () => {
-    const sql = `SELECT * FROM `
-}
+    const sql = `SELECT * FROM roles`;
+    
+
+    connect.query (sql, (err, res) => {
+        if (res)  {
+            const table = consoleTable.getTable(res);
+            console.log(table);
+            start();
+        }else{
+            console.log('Something went wrong', err);
+        }
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function quit() {
+    console.log("Goodbye!");
+    process.exit();
+  }
