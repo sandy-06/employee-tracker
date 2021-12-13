@@ -66,7 +66,7 @@ inquirer.prompt(
                 viewAllRoles();
                 break;
             case 'view_all_employees':
-                viewAllEmployee()
+                viewAllEmployees()
                 break;
             case 'add_a_department':
                 addDepartment();
@@ -123,14 +123,14 @@ THEN I am presented with a formatted table showing employee data, including empl
 
 const viewAllEmployees = () => {
     const sql = `SELECT employee.id, employee.first_name, employee.last_name, roles.title,
-    department.department-name AS department, roles.salary, 
-    CONCAT(manager.first_name'', manager.last_name) AS MANAGER FROM employee
+    department.name AS department, roles.salary, 
+    CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee
     LEFT JOIN roles
-    ON employee.role_id = roles.id
+    ON employee.roles_id = roles.id
     LEFT JOIN department
     ON roles.department_id = department_id
     LEFT JOIN employee manager
-    ON manager.id = employee.manager_id:`;
+    ON manager.id = employee.manager_id;`;
 
     connect.query (sql, (err, res) => {
         if (res)  {
