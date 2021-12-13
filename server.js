@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const connection = require('./config/connection');
+const consoleTable = require('console.table')
 
 inquirer.prompt(
     [
@@ -18,23 +19,23 @@ inquirer.prompt(
                },
                {
                    name: 'view all employees',
-                   value: 'view_all employees'
+                   value: 'view_all_employees'
                },
                {
                    name: 'add a department',
-                   value: 'add a department'
+                   value: 'add_a_department'
                },
                {
                    name: 'add a role',
-                   value: 'add a role'
+                   value: 'add_a_role'
                },
                {
                    name: 'add an employee',
-                   value: 'add an employee'
+                   value: 'add_an_employee'
                },
                {
                    name: 'update an employee',
-                   value: 'update an employee'
+                   value: 'update_an_employee'
                },
                {
                    name: 'quit',
