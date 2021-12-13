@@ -205,9 +205,9 @@ const addRole = () => {
 THEN I am prompted to enter the employee’s first name, last name, role, and manager, 
 and that employee is added to the database*/
 
-const addEmployee = () => {
+const addNewEmployee = () => {
     DB.findAllRoles().then(([employee]) => {
-        const employeeRoleOptions = employee.map(({ id, title } => ({
+        const employeeRoleOptions = employee.map(({ id, title }) => ({
             name: title,
             value: id,
         }));
@@ -260,8 +260,54 @@ const addEmployee = () => {
 
     });
 }
+/*WHEN I choose to update an employee role
+THEN I am prompted to select an employee to update and their new role and this information is updated in the database*/
+const updateEmployeeRole = () => {
+    DB.findAllEmployees().then(([employees]) => {
+        const employeeOptions = employee.map(({ id, first_name, last_name}) => ({
+            name: `${first_name} ${last_name}`,
+            value: id,
+        }));
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'employees',
+                message: 'Choose employee',
+                choices: employeeOptions,
+            },
+            
 
+            
+        ]).then((answers) => {
+            let employeeId =answers.employees;
+            console.log(answers.employees);
+            DB.findAllRoles().then(([]) => {
+                const roleOptions = role.map(({ id, title}) => ({
+                    name: title,
+                    value: id,
+                }));
+                inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'role',
+                        message: 'Pick role',
+                        choices: roleOptions,
+                    },
+                ])
+                .then((answers) => {
+                    let role = answers.role;
+                    console.log (answer.role);
+                    console.log('employeeId', employeeId)
+                    DB.updateRole(role, employeeId)
+                    .then(() => console.log('Employee role updated'))
+                    .then(() => start());
 
+                })   
+            })
+        })
+
+    })
+}
 
 
 
