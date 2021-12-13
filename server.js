@@ -197,7 +197,7 @@ const addRole = () => {
         )
         .then(() => start());
     }
-    )}
+    )})
 
 };
 
@@ -238,12 +238,27 @@ const addEmployee = () => {
                     choices: employeeRoleOptions,
                 },
                 {
-                    
-                }
-            ])
-        })
+                  type: 'list',
+                  name: 'manager',
+                  message: 'Choose manager',
+                  choices: managerOptions,  
+                },
+            ]).then((answers) => {
+                DB.addEmployee(
+                    answers.firstName,
+                    answers.lastName,
+                    answers.roles,
+                    answers.manager,
+                )
+                .then(() =>
+                console.log(
+                    `added ${answers.roles}, added ${answers.firstName}, add ${answers.lastName}, added ${answers.manager}`
+                ))
+                .then(() => start());
+            });
+        });
 
-    })
+    });
 }
 
 
