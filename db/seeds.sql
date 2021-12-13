@@ -1,5 +1,6 @@
 DROP DATABASE IF EXISTS employees:
-CREATE DATABASE employess;
+CREATE DATABASE employees;
+
 
 USE employees;
 
@@ -25,6 +26,7 @@ VALUES
 
 
 INSERT INTO employee (first_name, last_name, roles_id, manager_id)
+VALUES
 ('Sam', 'Smith', 1, 2),
 ('Brent', 'Hollingsworth', 2, null),
 ('Riley', 'Beach', 3, 2),
