@@ -13,7 +13,7 @@ connect.connect((err) => {
 });
 
 //then i am presented with the options to view or do
-
+function start() {
 inquirer.prompt(
     [
         {
@@ -59,34 +59,34 @@ inquirer.prompt(
 )
     .then(res => {
         switch (res.options) {
-            case 'view all departments':
+            case 'view_all_departments':
                 viewAllDepartments();
                 break;
-            case 'view all roles':
+            case 'view_all_roles':
                 viewAllRoles();
                 break;
-            case 'view all employees':
+            case 'view_all_employees':
                 viewAllEmployee()
                 break;
-            case 'add a department':
+            case 'add_a_department':
                 addDepartment();
                 break;
-            case 'add a role':
+            case 'add_a_role':
                 addRole();
                 break;
-            case 'add an employee':
+            case 'add_an_employee':
                 addEmployee();
                 break;
-            case 'update an employee':
+            case 'update_an_employee':
                 updateEmployee()
                 break;
             default:
                 quit();
         };
     });
-
+}
     // select view all departments
-    
+
 const viewAllDepartments = () => {
     const sql = `SELECT * FROM  department`;
 
@@ -96,8 +96,12 @@ const viewAllDepartments = () => {
             console.log(table);
             start();
         } else {
-            console.log('Wrong choice');
+            console.log('Wrong choice', err);
         }
     })
 };
 
+// view all roles
+const viewAllRoles = () => {
+    const sql = `SELECT * FROM `
+}
