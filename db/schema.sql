@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS employees;
-CREATE DATABASE employees;
+DROP DATABASE IF EXISTS employees_db;
+CREATE DATABASE employees_db;
 
-USE employees;
+USE employees_db;
 
 
 
@@ -27,9 +27,10 @@ CREATE TABLE employee (
     last_name VARCHAR(30) NOT NULL,
     roles_id INTEGER NOT NULL,
     manager_id INTEGER,
-    FOREIGN KEY (roles_id) 
-    REFERENCES roles(id)
-    
+    FOREIGN KEY (roles_id), 
+    REFERENCES roles(id),
+    FOREIGN KEY (manager_id),
+    REFERENCES employee(id)
     
 
 );
