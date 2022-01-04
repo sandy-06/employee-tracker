@@ -119,15 +119,7 @@ THEN I am presented with a formatted table showing employee data, including empl
  first names, last names, job titles, departments, salaries, and managers that the employees report to*/
 
  const viewAllEmployees = () => {
-     const sql = `SELECT employee.id, employee.first_name, employee.last_name, roles.title,
-     department.name AS department, roles.salary, 
-     CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee
-     LEFT JOIN roles
-     ON employee.roles_id = roles.id
-     LEFT JOIN department
-     ON roles.department_id = department_id
-     LEFT JOIN employee manager
-     ON manager.id = employee.manager_id;`;
+    const sql = `SELECT * FROM employee`;
     
     
     connect.query (sql, (err, res) => {
