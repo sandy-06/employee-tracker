@@ -7,7 +7,7 @@ class DB {
     };
 
 createDepartment(department) {
-    return this.connect.promise().query("INSERT INTO department (department_name) VALUES (?);", [department]);
+    return this.connect.promise().query("INSERT INTO department (name) VALUES (?);", [department]);
   };
 
 createRole(addRole, department, addSalary) {
@@ -15,7 +15,7 @@ createRole(addRole, department, addSalary) {
 };
 
 findAllDepartments() {
-    return this.connect.promise().query("SELECT id, department_name FROM department ORDER BY id;");
+    return this.connect.promise().query("SELECT id, name FROM department ORDER BY id;");
 };
 
 addEmployee(firstName, lastName, roles, manager) {

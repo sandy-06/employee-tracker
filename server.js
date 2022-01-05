@@ -2,8 +2,6 @@ const inquirer = require('inquirer');
 const connect = require('./db/connect');
 const consoleTable = require('console.table');
 const DB = require('./db/index')
-const db = require('./db/index');
-const { addEmployee } = require('./db/index');
 const connection = require('./db/connect');
 
 
@@ -119,7 +117,15 @@ THEN I am presented with a formatted table showing employee data, including empl
  first names, last names, job titles, departments, salaries, and managers that the employees report to*/
 
  const viewAllEmployees = () => {
-    const sql = `SELECT * FROM employee`;
+    const sql = `SELECT employee.id, employee.first_name, employee.last_name, roles.title, department.name AS department,
+    roles.salary,
+    concat(manager.first_name, ' ', manager.last_name) AS manager FROM employee
+    LEFT JOIN roles
+    on employee.roles_id = roles.id
+    LEFT JOIN department
+    on roles.department_id = department.id
+    LEFT JOIN employee manager
+    on manager.id = employee.manager_id`;
     
     
     connect.query (sql, (err, res) => {
@@ -160,8 +166,8 @@ for the role and that role is added to the database*/
 
 const addRole = () => {
     DB.findAllDepartments().then(([department]) => {
-        const departmentOptions = department.map(({ id, department_name}) => ({
-        name: department_name,
+        const departmentOptions = department.map(({ id, name}) => ({
+        name: name,
         value: id,
         
     }));
@@ -173,12 +179,12 @@ const addRole = () => {
       },
       {
           type: "input",
-          name: 'addsSalary',
+          name: 'addSalary',
           message: 'please enter salary',
       },
       {
           type: 'list',
-          name: 'Department',
+          name: 'department',
           message: 'Please enter the department for the role.',
           choices: departmentOptions,
       },
@@ -198,7 +204,7 @@ const addRole = () => {
 THEN I am prompted to enter the employee’s first name, last name, role, and manager, 
 and that employee is added to the database*/
 
-const addNewEmployee = () => {
+const addEmployee = () => {
     DB.findAllRoles().then(([employee]) => {
         const employeeRoleOptions = employee.map(({ id, title }) => ({
             name: title,
