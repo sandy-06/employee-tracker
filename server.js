@@ -210,14 +210,22 @@ const addEmployee = () => {
             name: title,
             value: id,
         }));
+        //let idObject;
+        //for (let i=0; i < employee.length; i++){
+           // idObject[employee[i].title] = employee[i].id
+     //   }
         DB.findAllEmployees().then(([manager]) =>{
             const managerOptions = manager.map(
                ({ id, first_name, last_name}) => ({
                    name: `${first_name} ${last_name}`,
                    value: id,
 
-               })
+               })             
             );
+           // let employeeObject;
+           // for (let i = 0; i< manager.length; i++) {
+            //    employeeObject[`${manager[i].first_name} ${manager[i].last_name}`] = manager[i].id
+           // }
             inquirer.prompt([
                 {
                     type: 'input',
@@ -243,12 +251,13 @@ const addEmployee = () => {
                   choices: managerOptions,  
                 },
             ]).then((answers) => {
+               
                 DB.addEmployee(
                     answers.firstName,
                     answers.lastName,
                     answers.roles,
                     answers.manager,
-                )
+            )
                 .then(() =>
                 console.log(
                     `added ${answers.roles}, added ${answers.firstName}, add ${answers.lastName}, added ${answers.manager}`
@@ -261,8 +270,8 @@ const addEmployee = () => {
 }
 /*WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database*/
-const updateEmployeeRole = () => {
-    DB.findAllEmployees().then(([employees]) => {
+const updateEmployee = () => {
+    DB.findAllEmployees().then(([employee]) => {
         const employeeOptions = employee.map(({ id, first_name, last_name}) => ({
             name: `${first_name} ${last_name}`,
             value: id,
@@ -270,7 +279,7 @@ const updateEmployeeRole = () => {
         inquirer.prompt([
             {
                 type: 'list',
-                name: 'employees',
+                name: 'employee',
                 message: 'Choose employee',
                 choices: employeeOptions,
             },
@@ -278,9 +287,9 @@ const updateEmployeeRole = () => {
 
             
         ]).then((answers) => {
-            let employeeId =answers.employees;
-            console.log(answers.employees);
-            DB.findAllRoles().then(([]) => {
+            let employeeId =answers.employee;
+            console.log(answers.employee);
+            DB.findAllRoles().then(([role]) => {
                 const roleOptions = role.map(({ id, title}) => ({
                     name: title,
                     value: id,
@@ -295,7 +304,7 @@ const updateEmployeeRole = () => {
                 ])
                 .then((answers) => {
                     let role = answers.role;
-                    console.log (answer.role);
+                    console.log (answers.role);
                     console.log('employeeId', employeeId)
                     DB.updateRole(role, employeeId)
                     .then(() => console.log('Employee role updated'))
