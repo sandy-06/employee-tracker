@@ -10,7 +10,10 @@ You’ll need to use the [MySQL2 package](https://www.npmjs.com/package/mysql2) 
 You will need to run them in the console to run the project. You will need to run mysql2 and the schema and seed files.
 
 ##Usage
+https://watch.screencastify.com/v/XjYsXBsZpFVIXOTMug4E
 
+![alt text] (assets/182806.png)
+![alt text](assets/182925.png)
 
 ##Credits
 Project done by Sandra Sanders
